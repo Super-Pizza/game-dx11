@@ -1,0 +1,20 @@
+[package]
+name = "game"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+winapi={version = "0.3.9", default-features = false, features = [
+        "windef",
+        "minwindef",
+        "ntdef",
+        "winuser",
+        "d3d11",
+        "d3dcommon",
+        "dxgi",
+        "libloaderapi",
+    ]}
+clap="2"
+directx_math="0.2.2"
