@@ -6,7 +6,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-winapi={version = "0.3.9", default-features = false, features = [
+winapi = {version = "0.3.9", default-features = false, features = [
         "windef",
         "minwindef",
         "ntdef",
@@ -14,7 +14,22 @@ winapi={version = "0.3.9", default-features = false, features = [
         "d3d11",
         "d3dcommon",
         "dxgi",
+        "dxgi1_6",
         "libloaderapi",
     ]}
-clap="2"
-directx_math="0.2.2"
+clap = "2"
+directx_math = "0.2.2"
+png = "0.17"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+opt-level = "s"
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = "z"
+[profile.release.package."*"]
+opt-level = "z"

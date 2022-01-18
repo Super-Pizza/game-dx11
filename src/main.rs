@@ -3,12 +3,13 @@ mod utils;
 mod app;
 use clap::clap_app;
 use std::process::exit;
+
 fn main() {
     let result = {
         let clap_app = clap_app! {App =>
             (version: "0.1.0")
             (author: "Fabien Cournoyer <fabien@cournoyer.club")
-            (about: "A Minecraft-like game, but MUCH faster!")
+            (about: "A voxel game... Nothing really interesting")
             (@arg VSYNC: -v --vsync {is_bool} "Enable VSync(Vertical Synchronization)")
             (@arg WIDTH:
                 -w
@@ -44,8 +45,15 @@ fn main() {
             .parse::<bool>()
             .unwrap();
         let flags = app::Flags { state, vsync };
-        match app::App::init(flags, String::from("my_game")) {
-            Ok(mut a) => a.run(),
+        let class_name = "com.game.dx11";
+        match app::App::init_application(flags, class_name) {
+            Ok(x) => {
+                let h_wnd = x;
+                match app::App::init(flags, class_name, h_wnd) {
+                    Ok(mut a) => a.run(),
+                    Err(e) => e,
+                }
+            }
             Err(e) => e,
         }
     };

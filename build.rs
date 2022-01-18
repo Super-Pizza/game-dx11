@@ -20,6 +20,8 @@ fn main() {
                     "gs_5_0"
                 } else if shader_file.to_lowercase().contains("pixel") {
                     "ps_5_0"
+                } else if shader_file.to_lowercase().contains("compute") {
+                    "cs_5_0"
                 } else {
                     panic!("Unknown shader type, please name it properly.")
                 };
